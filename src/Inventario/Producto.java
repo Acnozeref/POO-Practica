@@ -13,7 +13,7 @@ public class Producto {
             this.precio = precio;
             this.stock = stock;
     }
-    // Getters, consulta sin acceder a datos.
+    // Métodos para controlar las existencias.
     public int getId() {
         return id;
     }

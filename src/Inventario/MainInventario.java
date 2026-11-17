@@ -45,14 +45,24 @@ public class MainInventario {
         inventario.registrarProducto(producto04);
         inventario.registrarProducto(producto05);
 
+        // Agregar existencias de Stock
+        inventario.agregarExistencias(101, 5);
+        inventario.agregarExistencias(103, 10);
+        inventario.agregarExistencias(999, 5);
+
+        // Retiro de existencias de Stock
+        inventario.retirarExistencias(101, 5);
+        inventario.retirarExistencias(102, 50);
+        inventario.retirarExistencias(999, 5);
+
         // Consulta de todos los productos.
         inventario.consultarProductos();
 
         // Buscar un producto (encontrado).
-        inventario.buscarProducto(103);
-        inventario.buscarProducto(105);
+        // inventario.buscarProducto(103);
+        // inventario.buscarProducto(105);
 
         // Buscar producto inexistente.
-        inventario.buscarProducto(999);
+        // inventario.buscarProducto(999);
     }
 }

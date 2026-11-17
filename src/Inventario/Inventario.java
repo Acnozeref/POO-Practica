@@ -48,4 +48,66 @@ public class Inventario {
             System.out.println("Producto no encontrado");
         }
     }
+
+    public void agregarExistencias(int id, int cantidad) {
+        // Variable centinela.
+        boolean encontrado = false;
+
+        // Validar que cantidad no sea negativo.
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser mayor a 0.");
+            return;
+        }
+
+        for (Producto producto : productos) {
+
+            if (producto.getId() == id) {
+                encontrado = true;
+                producto.agregarStock(cantidad);
+                System.out.println("La cantidad agregada del producto " + producto.getNombre() + " fue de " + cantidad);
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Producto no encontrado.");
+        }
+    }
+
+    public void retirarExistencias(int id, int cantidad) {
+
+        boolean encontrado = false;
+
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser mayor a 0.");
+            return;
+        }
+
+        for (Producto producto : productos) {
+
+            if (producto.getId() == id) {
+                encontrado = true;
+
+                // Comprobar que exista stock suficiente.
+                if (cantidad > producto.getStock()) {
+                    System.out.println("Stock insuficiente.");
+                    return;
+                }
+
+                producto.retirarStock(cantidad);
+
+                System.out.println(
+                        "La cantidad retirada del producto "
+                                + producto.getNombre()
+                                + " fue de " + cantidad
+                );
+
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Producto no encontrado.");
+        }
+    }
 }
