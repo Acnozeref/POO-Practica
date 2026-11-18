@@ -56,7 +56,7 @@ public class MainInventario {
         inventario.retirarExistencias(999, 5);
 
         // Consulta de todos los productos.
-        inventario.consultarProductos();
+        // inventario.consultarProductos();
 
         // Buscar un producto (encontrado).
         // inventario.buscarProducto(103);
@@ -64,5 +64,8 @@ public class MainInventario {
 
         // Buscar producto inexistente.
         // inventario.buscarProducto(999);
+
+        // Consultar movimientos.
+        inventario.consultarMovimientos();
     }
 }

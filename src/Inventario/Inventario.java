@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Inventario {
 
     private ArrayList<Producto> productos;
+    private ArrayList<Movimiento> movimientos;
 
     public Inventario() {
         this.productos = new ArrayList<>();
+        this.movimientos = new ArrayList<>();
     }
 
     public void registrarProducto(Producto producto) {
@@ -64,7 +66,13 @@ public class Inventario {
             if (producto.getId() == id) {
                 encontrado = true;
                 producto.agregarStock(cantidad);
-                System.out.println("La cantidad agregada del producto " + producto.getNombre() + " fue de " + cantidad);
+                // Registro entrada de productos.
+                Movimiento movimiento = new Movimiento(producto, "ENTRADA", cantidad);
+                movimientos.add(movimiento);
+
+                System.out.println("La cantidad agregada del producto "
+                            + producto.getNombre() +
+                                " fue de " + cantidad);
                 break;
             }
         }
@@ -95,6 +103,9 @@ public class Inventario {
                 }
 
                 producto.retirarStock(cantidad);
+                // Registro de SALIDA de stock
+                Movimiento movimiento = new Movimiento(producto, "SALIDA", cantidad);
+                movimientos.add(movimiento);
 
                 System.out.println(
                         "La cantidad retirada del producto "
@@ -108,6 +119,22 @@ public class Inventario {
 
         if (!encontrado) {
             System.out.println("Producto no encontrado.");
+        }
+    }
+
+    public void consultarMovimientos() {
+
+        if (movimientos.isEmpty()) {
+            System.out.println("No hay movimientos registrados.");
+        }
+
+        for (Movimiento movimiento : movimientos) {
+            // Encadenacion de llamadas,
+            System.out.println("ID: " + movimiento.getProducto().getId());
+            System.out.println("Producto: " + movimiento.getProducto().getNombre());
+            System.out.println("Tipo: " + movimiento.getTipo());
+            System.out.println("Cantidad: " + movimiento.getCantidad());
+            System.out.println("---------------------");
         }
     }
 }
