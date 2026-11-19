@@ -9,6 +9,7 @@ Colección de mini-proyectos para practicar **Programación Orientada a Objetos 
 | Proyecto | Descripción | Conceptos de POO | Carpeta |
 |---|---|---|---|
 | Biblioteca | Gestión básica de libros, usuarios, préstamos y devoluciones. | Clases y objetos, encapsulamiento, constructores, composición, colecciones | [src/Biblioteca](./src/Biblioteca) |
+| Inventario | Gestión de productos, stock y movimientos de entrada y salida. | Clases y objetos, encapsulamiento, constructores, composición, colecciones | [src/Inventario](./src/Inventario) |
 
 > _(Se irán añadiendo más filas conforme se incorporen nuevos mini-proyectos.)_
 
@@ -35,7 +36,7 @@ Herencia, polimorfismo, interfaces, clases abstractas, excepciones y persistenci
 
 ### Requisitos
 
-- JDK 17 o superior (el proyecto se desarrolló con JDK 25).
+- JDK 25 o superior (el proyecto está configurado con JDK 25).
 
 ### Cómo ejecutar
 
@@ -44,6 +45,43 @@ Desde la raíz del proyecto:
 ```bash
 javac -d out src/Biblioteca/*.java
 java -cp out Biblioteca.MainBiblioteca
+```
+
+También puedes abrir el proyecto directamente en IntelliJ IDEA.
+
+## Inventario
+
+Segundo mini-proyecto del repositorio. Simula el control básico de un almacén: registrar productos, consultar el catálogo, buscar por identificador, agregar y retirar existencias y registrar cada movimiento de entrada o salida.
+
+- **Carpeta:** [src/Inventario](./src/Inventario)
+
+### Conceptos de POO aplicados
+
+- **Clases y objetos:** se modelan las entidades del dominio con las clases `Producto`, `Movimiento` e `Inventario`, y se crean objetos a partir de ellas.
+- **Atributos y encapsulamiento:** los atributos se declaran `private` y se accede a ellos mediante métodos públicos (`getters`); el stock solo se modifica a través de `agregarStock` y `retirarStock`, aplicando las condiciones en un único lugar.
+- **Constructores:** cada clase inicializa sus atributos a través de su constructor; `Inventario` crea además sus colecciones vacías.
+- **Métodos:** cada clase expone su comportamiento mediante métodos (`registrarProducto`, `buscarProducto`, `agregarExistencias`, `retirarExistencias`, `consultarMovimientos`, etc.).
+- **Abstracción:** `Inventario` concentra la lógica de negocio y oculta los detalles de cómo se almacenan y buscan los datos.
+- **Composición:** `Inventario` contiene colecciones de `Producto` y de `Movimiento`, y cada `Movimiento` guarda una referencia al `Producto` al que pertenece; los objetos se relacionan entre sí.
+- **Colecciones:** se usa `ArrayList` para almacenar productos y movimientos, y se recorren con bucles `for-each`.
+- **Búsqueda y validación:** se recorre la colección con una variable centinela (`encontrado`) para localizar productos por `id` (que es `int` y se compara con `==`, frente a `equals` para las cadenas de Biblioteca), comprobando además que la cantidad sea mayor que cero y que exista stock suficiente antes de retirar.
+- **Encadenación de llamadas:** en `consultarMovimientos` se accede al producto asociado directamente con `movimiento.getProducto().getId()`.
+
+### Conceptos pendientes de practicar
+
+Herencia, polimorfismo, interfaces, clases abstractas, excepciones y persistencia de datos. Como mejora concreta, el campo `tipo` de `Movimiento` podría sustituirse por un `enum` (`ENTRADA`, `SALIDA`) en lugar de un `String`.
+
+### Requisitos
+
+- JDK 25 o superior (el proyecto está configurado con JDK 25).
+
+### Cómo ejecutar
+
+Desde la raíz del proyecto:
+
+```bash
+javac -d out src/Inventario/*.java
+java -cp out Inventario.MainInventario
 ```
 
 También puedes abrir el proyecto directamente en IntelliJ IDEA.
