@@ -47,16 +47,19 @@ public class MainInventario {
 //
 //            System.out.println(e.getMessage());
 //        }
-        try {
-            Producto productoInvalido = new Producto(106, "Laptop", -500, 10);
-            inventario.registrarProducto(productoInvalido);
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al registrar: " + e.getMessage());
-        }
+//        try {
+//            Producto productoInvalido = new Producto(101, "Laptop", 500, 10);
+//            inventario.registrarProducto(productoInvalido);
+//
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("Error al registrar: " + e.getMessage());
+//        }
 
         // Registro de productos.
-//        inventario.registrarProducto(producto01);
+        Producto productoInvalido = new Producto(101, "Laptop", 500, 10);
+        inventario.registrarProducto(producto01);
+        inventario.registrarProducto(productoInvalido);
+
 //        inventario.registrarProducto(producto02);
 //        inventario.registrarProducto(producto03);
 //        inventario.registrarProducto(producto04);

@@ -13,8 +13,29 @@ public class Inventario {
     }
 
     public void registrarProducto(Producto producto) {
+
+        // Evitar que se registre otro producto con el mismo ID.
+        boolean encontrado = false;
+        // Rechaza datos nulos.
+        if (producto == null) {
+            System.out.println("Null no admitido, por favor ingresa los datos requeridos.");
+            return;
+        }
+
+        for (Producto productoExistente : productos) {
+
+            if (productoExistente.getId() == producto.getId()) {
+                encontrado = true;
+            }
+        }
+
+        if (encontrado) {
+            System.out.println("La id del producto ya existe.");
+            return;
+        }
         this.productos.add(producto);
         System.out.println("Producto registrado exitosamente: " + producto.getNombre());
+
     }
 
     public void consultarProductos() {
