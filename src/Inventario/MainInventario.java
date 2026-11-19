@@ -38,22 +38,39 @@ public class MainInventario {
                 30
         );
 
+        // Prueba de datos invalidos.
+//        try {
+//
+//            Producto productoPrueba = new Producto(106, "Laptop", -500, -5);
+//
+//        } catch (IllegalArgumentException e) {
+//
+//            System.out.println(e.getMessage());
+//        }
+        try {
+            Producto productoInvalido = new Producto(106, "Laptop", -500, 10);
+            inventario.registrarProducto(productoInvalido);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al registrar: " + e.getMessage());
+        }
+
         // Registro de productos.
-        inventario.registrarProducto(producto01);
-        inventario.registrarProducto(producto02);
-        inventario.registrarProducto(producto03);
-        inventario.registrarProducto(producto04);
-        inventario.registrarProducto(producto05);
-
-        // Agregar existencias de Stock
-        inventario.agregarExistencias(101, 5);
-        inventario.agregarExistencias(103, 10);
-        inventario.agregarExistencias(999, 5);
-
-        // Retiro de existencias de Stock
-        inventario.retirarExistencias(101, 5);
-        inventario.retirarExistencias(102, 50);
-        inventario.retirarExistencias(999, 5);
+//        inventario.registrarProducto(producto01);
+//        inventario.registrarProducto(producto02);
+//        inventario.registrarProducto(producto03);
+//        inventario.registrarProducto(producto04);
+//        inventario.registrarProducto(producto05);
+//
+//        // Agregar existencias de Stock
+//        inventario.agregarExistencias(101, 5);
+//        inventario.agregarExistencias(103, 10);
+//        inventario.agregarExistencias(999, 5);
+//
+//        // Retiro de existencias de Stock
+//        inventario.retirarExistencias(101, 5);
+//        inventario.retirarExistencias(102, 50);
+//        inventario.retirarExistencias(999, 5);
 
         // Consulta de todos los productos.
         // inventario.consultarProductos();
@@ -66,6 +83,6 @@ public class MainInventario {
         // inventario.buscarProducto(999);
 
         // Consultar movimientos.
-        inventario.consultarMovimientos();
+        // inventario.consultarMovimientos();
     }
 }

@@ -8,6 +8,27 @@ public class Producto {
     private int stock;
     // Constructor.
     public Producto (int id, String nombre, double precio, int stock) {
+
+            // Validación de datos en constructores.
+            if (id <= 0) {
+                throw new IllegalArgumentException(
+                        "El ID debe ser mayor a cero."
+                );
+            }
+
+            if (nombre == null || nombre.isBlank()) {
+                throw new IllegalArgumentException(
+                        "El nombre no de estar vacio"
+                );
+            }
+
+            if (precio <= 0 || stock < 0) {
+
+                throw new IllegalArgumentException(
+                        "El precio debe ser mayor a cero y el stock no puede ser negativo."
+                );
+            }
+
             this.id = id;
             this.nombre = nombre;
             this.precio = precio;
