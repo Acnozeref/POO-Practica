@@ -9,7 +9,7 @@ Colección de mini-proyectos para practicar **Programación Orientada a Objetos 
 | Proyecto | Descripción | Conceptos de POO | Carpeta |
 |---|---|---|---|
 | Biblioteca | Gestión básica de libros, usuarios, préstamos y devoluciones. | Clases y objetos, encapsulamiento, constructores, composición, colecciones | [src/Biblioteca](./src/Biblioteca) |
-| Inventario | Gestión de productos, stock y movimientos de entrada y salida. | Clases y objetos, encapsulamiento, constructores, composición, colecciones | [src/Inventario](./src/Inventario) |
+| Inventario | Gestión de productos, stock y movimientos de entrada y salida, con validación de datos y control de IDs duplicados. | Clases y objetos, encapsulamiento, constructores, composición, colecciones, validación y excepciones | [src/Inventario](./src/Inventario) |
 
 > _(Se irán añadiendo más filas conforme se incorporen nuevos mini-proyectos.)_
 
@@ -51,7 +51,7 @@ También puedes abrir el proyecto directamente en IntelliJ IDEA.
 
 ## Inventario
 
-Segundo mini-proyecto del repositorio. Simula el control básico de un almacén: registrar productos, consultar el catálogo, buscar por identificador, agregar y retirar existencias y registrar cada movimiento de entrada o salida.
+Segundo mini-proyecto del repositorio. Simula el control básico de un almacén: registrar productos (rechazando nulos e IDs repetidos), consultar el catálogo, buscar por identificador, agregar y retirar existencias y registrar cada movimiento de entrada o salida.
 
 - **Carpeta:** [src/Inventario](./src/Inventario)
 
@@ -65,11 +65,13 @@ Segundo mini-proyecto del repositorio. Simula el control básico de un almacén:
 - **Composición:** `Inventario` contiene colecciones de `Producto` y de `Movimiento`, y cada `Movimiento` guarda una referencia al `Producto` al que pertenece; los objetos se relacionan entre sí.
 - **Colecciones:** se usa `ArrayList` para almacenar productos y movimientos, y se recorren con bucles `for-each`.
 - **Búsqueda y validación:** se recorre la colección con una variable centinela (`encontrado`) para localizar productos por `id` (que es `int` y se compara con `==`, frente a `equals` para las cadenas de Biblioteca), comprobando además que la cantidad sea mayor que cero y que exista stock suficiente antes de retirar.
+- **Validación y excepciones:** el constructor de `Producto` lanza `IllegalArgumentException` si el `id` no es positivo, el `nombre` es `null` o está en blanco (`isBlank()`), el `precio` no es positivo o el `stock` es negativo, evitando objetos con estado inválido.
+- **Retorno anticipado:** `registrarProducto` comprueba primero si el producto es `null` o si ya existe otro con el mismo `id`, y sale con `return` antes de modificar la colección.
 - **Encadenación de llamadas:** en `consultarMovimientos` se accede al producto asociado directamente con `movimiento.getProducto().getId()`.
 
 ### Conceptos pendientes de practicar
 
-Herencia, polimorfismo, interfaces, clases abstractas, excepciones y persistencia de datos. Como mejora concreta, el campo `tipo` de `Movimiento` podría sustituirse por un `enum` (`ENTRADA`, `SALIDA`) en lugar de un `String`.
+Manejo de excepciones con `try/catch` (los ejemplos de `MainInventario` están comentados), herencia, polimorfismo, interfaces, clases abstractas y persistencia de datos. Como mejora concreta, el campo `tipo` de `Movimiento` podría sustituirse por un `enum` (`ENTRADA`, `SALIDA`) en lugar de un `String`.
 
 ### Requisitos
 
@@ -83,6 +85,8 @@ Desde la raíz del proyecto:
 javac -d out src/Inventario/*.java
 java -cp out Inventario.MainInventario
 ```
+
+Para probar el manejo de excepciones, descomenta los bloques `try/catch` de `MainInventario`.
 
 También puedes abrir el proyecto directamente en IntelliJ IDEA.
 
